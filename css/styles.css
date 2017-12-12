@@ -1,0 +1,48 @@
+body {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.listContainer {
+
+  background-color: #E76319;
+  border: 1px solid white;
+  border-radius: 10px;
+  margin: 0 auto 0 auto;
+  width: 30%;
+  height: auto;
+}
+
+.listParent {
+  list-style: none;
+}
+
+.listChild {
+  background-color: #FFFFFF;
+  border-radius: 10px;
+  font-size: 1.3em;
+  width: 85%;
+  display: block;
+  margin: 20px auto;
+}
+
+.inputTask {
+  font-size: 13px;
+  display: block;
+  margin: 20px auto;
+}
+
+.taskButton {
+  font-size: 15px;
+  display: block;
+  margin: 20px auto;
+}
+
+
+.deleteButton {
+  font-size: 11px;
+  position: relative;
+  float: right;
+  margin-right: 10px;
+  margin-top:3px;
+}
