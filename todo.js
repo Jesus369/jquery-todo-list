@@ -6,54 +6,47 @@ $(taskContainer).html(`<h3>Pending Tasks</h3>`)
 
 let completedContainer = $('<div>').attr ({ id : 'completedContainer', class : 'completedClass'}).appendTo($(body))
 
+$(completedContainer).append(`<h3>Completed Tasks</h3>`)
+
 let completedDiv = $('<div>').attr ({ id : 'completedDiv'}).appendTo($(completedContainer))
 
-$(completedDiv).html(`<h3>Completed Tasks</h3>`)
-
 let userInput = $('<input/>').attr ({ type : 'text', id : 'userInput', class : 'inputTask'}).appendTo($(divContainer))
+
+let checkBox = $('<input/>').attr({ type : 'checkbox', id : 'checkBox', class : 'checkBoxClass'})
 
 
 let submitTask = $('<button>Add Task</button>').attr({ id: 'taskSubmitted', class : 'taskButton'}).click(function(){
   console.log('Submit task button fired')
 
 
-  let checkBox = $('<input/>').attr({ type : 'checkbox', id : 'checkBox', class : 'checked'}).click(function(){
-    if($(checkBox).is(':checked')){
-      $(checkBox).attr('checked', true);
-      console.log('checkkbox checked')
-      Transfer()
-    }
-  })
+  let checkBox = $('<input/>').attr({ type : 'checkbox', id : 'checkBox', class : 'checkBoxClass'})
 
-
-
-  let deleteTask = $('<button>Delete</button>').attr({id : 'deleteTask', class : 'deleted'})
-    function Transfer() {
-        ($(deleteTask).click(function(){
-      console.log('Delete button is clicked!')
-      $(liListings).appendTo($(completedDiv))
-      $(checkBox).prop('checked', false);
-    })
-  )}
-
-
+  let deleteTask = $('<button>Delete</button>').attr({id : 'deleteTask', class : 'deleteButton'})
 
   let liListings = $('<li>').attr ({ id : 'liListings', class : 'liClass' })
-  $(liListings).append($(checkBox)).append(`${userInput.val()}`).append($(deleteTask))
+  $(liListings).html($(checkBox)).append(`${userInput.val()}`).append($(deleteTask))
   $(listDiv).append($(liListings))
   userInput.val('')
+
+
+  $(deleteTask).click(function(){
+    $(checkBox).each(function() {
+      if ($(this).is(':checked')) {
+        $(this).parent().appendTo($(completedDiv))
+        $(checkBox).prop('checked', false);
+        $(checkBox).click(function(){
+          if($(checkBox).is(':checked')) {
+            console.log('checked')
+            $(listDiv).append($(liListings))
+
+          }
+        })
+      }
+    })
+  })
 
 
 }).appendTo($(taskContainer))
 
 let listDiv = $('<div>').attr ({ id : 'listDiv', class : 'olClass' }).appendTo($(taskContainer))
-
-
-
-
-// if($(deleteTask).data('clicked'))
-//
-// if ( $('input[name="subscribe"]').is(':checked') ) {
-//     $('input[name="email"]').show();
-// }
 
