@@ -1,50 +1,59 @@
+let body = $('body').attr({ id : 'body' })
+
+let taskContainer = $('<div>').attr ({ id : 'divContainer', class : 'listContainer'}).appendTo($(body))
+
+$(taskContainer).html(`<h3>Pending Tasks</h3>`)
+
+let completedContainer = $('<div>').attr ({ id : 'completedContainer', class : 'completedClass'}).appendTo($(body))
+
+let completedDiv = $('<div>').attr ({ id : 'completedDiv'}).appendTo($(completedContainer))
+
+$(completedDiv).html(`<h3>Completed Tasks</h3>`)
+
+let userInput = $('<input/>').attr ({ type : 'text', id : 'userInput', class : 'inputTask'}).appendTo($(divContainer))
 
 
-let body = $('body')
+let submitTask = $('<button>Add Task</button>').attr({ id: 'taskSubmitted', class : 'taskButton'}).click(function(){
+  console.log('Submit task button fired')
 
-// Creating a div to container our To-Do-App
-let toDoContainer = $('<div>')
-toDoContainer.addClass('listContainer')
 
-let submitTask = $('<button>Submit</button>')
-submitTask.attr('id','taskBtn')
-submitTask.addClass('taskButton')
+  let checkBox = $('<input/>').attr({ type : 'checkbox', id : 'checkBox', class : 'checked'}).click(function(){
+    if($(checkBox).is(':checked')){
+      $(checkBox).attr('checked', true);
+      console.log('checkkbox checked')
+      Transfer()
+    }
+  })
 
-// Creating input for task
-let taskInput = $('<input type="text">')
-taskInput.addClass('inputTask')
 
-// to do unordered list-
-let listUL = $('<li>')
-$(listUL).sortable();
-listUL.attr('id','listUL')
-listUL.addClass('listParent')
 
-// listUL is first identified & on click for any button within listUL that is located near an 'li' element will be removed
-$(listUL).on('click','button',function(){
-    $(this).closest('li').slideToggle(500,function(){
-      $(this).remove()
+  let deleteTask = $('<button>Delete</button>').attr({id : 'deleteTask', class : 'deleted'})
+    function Transfer() {
+        ($(deleteTask).click(function(){
+      console.log('Delete button is clicked!')
+      $(liListings).appendTo($(completedDiv))
+      $(checkBox).prop('checked', false);
     })
-});
+  )}
 
-let deleteTask = $('<button>Delete</button>')
-deleteTask.addClass('deleteButton')
 
-body.append(toDoContainer)
-toDoContainer.append(taskInput)
-toDoContainer.append(submitTask)
-toDoContainer.append(listUL)
 
- $(submitTask).click(function() {
+  let liListings = $('<li>').attr ({ id : 'liListings', class : 'liClass' })
+  $(liListings).append($(checkBox)).append(`${userInput.val()}`).append($(deleteTask))
+  $(listDiv).append($(liListings))
+  userInput.val('')
 
-   // Creating tag "li"
-   let listLI = $('<li>')
-   listLI.addClass('listChild')
-   listLI.attr('id','listingsID')
 
-   $(listLI).html(`${taskInput.val()} <button class="deleteButton" id="delTaskBtn">Delete</button>`)
-   $(listUL).append($(listLI))
+}).appendTo($(taskContainer))
 
-   taskInput.val('');
+let listDiv = $('<div>').attr ({ id : 'listDiv', class : 'olClass' }).appendTo($(taskContainer))
 
- })
+
+
+
+// if($(deleteTask).data('clicked'))
+//
+// if ( $('input[name="subscribe"]').is(':checked') ) {
+//     $('input[name="email"]').show();
+// }
+
