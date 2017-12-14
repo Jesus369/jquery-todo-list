@@ -1,19 +1,8 @@
 let body = $('body').attr({ id : 'body' })
 
-let taskContainer = $('<div>').attr ({ id : 'divContainer', class : 'listContainer'}).appendTo($(body))
+$(body).append(`<h3>Pending Tasks</h3>`)
 
-$(taskContainer).html(`<h3>Pending Tasks</h3>`)
-
-let completedContainer = $('<div>').attr ({ id : 'completedContainer', class : 'completedClass'}).appendTo($(body))
-
-$(completedContainer).append(`<h3>Completed Tasks</h3>`)
-
-let completedDiv = $('<div>').attr ({ id : 'completedDiv'}).appendTo($(completedContainer))
-
-let userInput = $('<input/>').attr ({ type : 'text', id : 'userInput', class : 'inputTask'}).appendTo($(divContainer))
-
-let checkBox = $('<input/>').attr({ type : 'checkbox', id : 'checkBox', class : 'checkBoxClass'})
-
+let userInput = $('<input/>').attr ({ type : 'text', id : 'userInput', class : 'inputTask'}).appendTo($(body))
 
 let submitTask = $('<button>Add Task</button>').attr({ id: 'taskSubmitted', class : 'taskButton'}).click(function(){
   console.log('Submit task button fired')
@@ -38,7 +27,7 @@ let submitTask = $('<button>Add Task</button>').attr({ id: 'taskSubmitted', clas
           if($(checkBox).is(':checked')) {
             console.log('checked')
             $(listDiv).append($(liListings))
-
+            $(checkBox).attr('checked', false);
           }
         })
       }
@@ -46,7 +35,22 @@ let submitTask = $('<button>Add Task</button>').attr({ id: 'taskSubmitted', clas
   })
 
 
-}).appendTo($(taskContainer))
+}).appendTo($(body))
+
+let taskContainer = $('<div>').attr ({ id : 'divContainer', class : 'listContainer'}).appendTo($(body))
+
+$(taskContainer).html(`<h3>Pending Tasks</h3>`)
+
+let completedContainer = $('<div>').attr ({ id : 'completedContainer', class : 'completedClass'}).appendTo($(body))
+
+$(completedContainer).append(`<h3>Completed Tasks</h3>`)
+
+let completedDiv = $('<div>').attr ({ id : 'completedDiv'}).appendTo($(completedContainer))
+
+let checkBox = $('<input/>').attr({ type : 'checkbox', id : 'checkBox', class : 'checkBoxClass'})
+
 
 let listDiv = $('<div>').attr ({ id : 'listDiv', class : 'olClass' }).appendTo($(taskContainer))
+$(listDiv).sortable()
+
 
